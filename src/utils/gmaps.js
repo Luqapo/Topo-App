@@ -1,6 +1,7 @@
 // Your personal API key.
 // Get it here: https://console.cloud.google.com/google/maps-apis
-const API_KEY = 'AIzaSyAa0Ysbv8qRxXfHDfTWLO8iXihd9VKHlyY';
+const API_KEY = require('../../config/config.json').mapApiKey;
+
 const CALLBACK_NAME = 'gmapsCallback';
 
 let initialized = !!window.google;
