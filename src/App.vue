@@ -1,12 +1,36 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app id="inspire">
+    <Nav/>
+    <v-content>
+      <v-container
+        class="fill-height"
+        fluid
+      >
+        <router-view/>
+      </v-container>
+    </v-content>
+    <v-footer
+      color="indigo"
+      app
+    >
+      <span class="white--text">&copy; 2019</span>
+    </v-footer>
+  </v-app>
 </template>
+
+<script>
+import Nav from '@/components/Nav.vue';
+
+export default {
+  components: {
+    Nav,
+  },
+  props: {
+    source: String,
+  },
+};
+</script>
+
 
 <style>
 #app {
