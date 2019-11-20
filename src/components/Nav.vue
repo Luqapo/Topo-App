@@ -41,7 +41,7 @@
 
 <script>
 export default {
-  name: 'nav',
+  name: 'navi',
   data: () => ({
     drawer: null,
   }),
