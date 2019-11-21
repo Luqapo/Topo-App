@@ -46,6 +46,6 @@ body {
 
 .Map {
   width: 100vw;
-  height: 80vh;
+  height: 100%  ;
 }
 </style>

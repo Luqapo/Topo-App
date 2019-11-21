@@ -1,6 +1,11 @@
 <template>
   <div class="hello">
-    <h1>{{msg}}</h1>
+    <v-list v-if="content.length">
+      <v-list-item v-for="(item) in content" :key="item.id">
+        <h2>{{item.name}}</h2>
+      </v-list-item>
+    </v-list>
+    <h1 v-else>{{msg}}</h1>
   </div>
 </template>
 
@@ -9,6 +14,25 @@ export default {
   name: 'Main',
   props: {
     msg: String,
+  },
+  data() {
+    return {
+      content: [],
+    };
+  },
+  async created() {
+    console.log('Created.');
+    const areas = await fetch('http://localhost:3000/area')
+      .then((res) => {
+        console.log('RES', res);
+        if (res.status !== 200) {
+          return res.json().then((re) => { throw new Error(re.error); });
+        }
+        return res.json();
+      })
+      .catch(err => console.log('ERROR ->', err));
+    console.log('RES ->', areas);
+    this.content.push(...areas);
   },
 };
 </script>
