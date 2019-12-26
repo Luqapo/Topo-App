@@ -11,6 +11,23 @@ const routes = [
     component: Home,
   },
   {
+    path: '/areas',
+    name: 'home',
+    component: Home,
+  },
+  {
+    path: '/region/:regionId',
+    name: 'region',
+    props: true,
+    component: () => import(/* webpackChunkName: "region" */ '../views/Region.vue'),
+  },
+  {
+    path: '/regions/:areaId',
+    name: 'regions',
+    props: true,
+    component: () => import(/* webpackChunkName: "regions" */ '../views/Regions.vue'),
+  },
+  {
     path: '/about',
     name: 'about',
     // route level code-splitting

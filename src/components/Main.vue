@@ -1,15 +1,21 @@
 <template>
   <div class="hello">
-    <v-list v-if="content.length">
-      <v-list-item v-for="(item) in content" :key="item.id">
-        <h2>{{item.name}}</h2>
-      </v-list-item>
-    </v-list>
-    <h1 v-else>{{msg}}</h1>
+    <v-list-item-group v-model="item" color="primary">
+      <v-list v-if="content.length">
+        <v-list-item v-for="(area) in content" :key="area.id">
+          <v-list-item-content>
+            <v-list-item-title v-text="area.name" @click="getRegions(area.id)"></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+      <h1 v-else>{{msg}}</h1>
+    </v-list-item-group>
   </div>
 </template>
 
 <script>
+const { API_URL } = require('../../config/config');
+
 export default {
   name: 'Main',
   props: {
@@ -21,18 +27,25 @@ export default {
     };
   },
   async created() {
-    console.log('Created.');
-    const areas = await fetch('http://localhost:3000/area')
-      .then((res) => {
-        console.log('RES', res);
-        if (res.status !== 200) {
-          return res.json().then((re) => { throw new Error(re.error); });
-        }
-        return res.json();
-      })
-      .catch(err => console.log('ERROR ->', err));
-    console.log('RES ->', areas);
+    const areas = await this.fetch('area');
     this.content.push(...areas);
+  },
+  methods: {
+    async getRegions(areaId) {
+      this.$router.push({ path: `regions/${areaId}` });
+    },
+    async fetch(route) {
+      const data = await fetch(`${API_URL}/${route}`)
+        .then((res) => {
+          if(res.status !== 200) {
+            return res.json().then((re) => { throw new Error(re.error); });
+          }
+          return res.json();
+        })
+        .catch(err => console.log('ERROR ->', err));
+      console.log('DATA ->', data);
+      return data;
+    },
   },
 };
 </script>

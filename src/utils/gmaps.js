@@ -18,7 +18,7 @@ export default function init() {
   // If Google Maps already is initialized
   // the `initPromise` should get resolved
   // eventually.
-  if (initialized) return initPromise;
+  if(initialized) return initPromise;
 
   initialized = true;
   // The callback function is called by

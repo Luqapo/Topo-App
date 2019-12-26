@@ -30,7 +30,7 @@ export default {
       marker.addListener('click', () => {
         infowindow.open(map, marker);
       });
-    } catch (error) {
+    } catch(error) {
       console.error(error);
     }
   },
