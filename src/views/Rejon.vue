@@ -6,7 +6,7 @@
 
 <script>
 // @ is an alias to /src
-import Region from '@/components/Region.vue';
+import Region from '@/components/Rejon.vue';
 
 export default {
   name: 'region',

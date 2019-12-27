@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <v-list-item-group v-model="item" color="primary">
+    <v-list-item-group color="primary">
       <v-list v-if="content.length">
         <v-list-item v-for="(area) in content" :key="area.id">
           <v-list-item-content>

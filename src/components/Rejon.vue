@@ -4,8 +4,8 @@
       <v-list-group
             no-action
             sub-group
-            value="false"
-            v-if="data.sectors.length"
+            :value="false"
+            v-if="data && data.sectors && data.sectors.length"
           >
             <template v-slot:activator>
               <v-list-item-content>
@@ -15,21 +15,21 @@
 
             <v-list-item
               v-for="(item) in data.sectors"
-              :key="item"
+              :key="item.id"
               link
+              @click="getSector(item.id)"
             >
-              <v-list-item-title v-text="item"></v-list-item-title>
+              <v-list-item-title v-text="item.name"></v-list-item-title>
               <v-list-item-icon>
                 <v-icon >></v-icon>
               </v-list-item-icon>
             </v-list-item>
-          </v-list-group>
-      <h1 v-else>Something goes wrong sorry</h1>
+      </v-list-group>
       <v-list-group
             no-action
             sub-group
             value="fasle"
-            v-if="data.sectors.length"
+            v-if="data && data.crags && data.crags.length"
           >
             <template v-slot:activator>
               <v-list-item-content>
@@ -39,12 +39,16 @@
 
             <v-list-item
               v-for="(item) in data.crags"
-              :key="item"
+              :key="item.id"
               link
             >
-              <v-list-item-title v-text="item"></v-list-item-title>
-              <v-list-item-icon>
-                <v-icon >></v-icon>
+              <v-list-item-title
+                v-text="item.name"
+                @click="getCrag(item.id)"
+                >
+              </v-list-item-title>
+              <v-list-item-icon @click="showMap(item)">
+                <v-icon >near_me</v-icon>
               </v-list-item-icon>
             </v-list-item>
           </v-list-group>
@@ -68,14 +72,20 @@ export default {
   },
   async created() {
     const data = await fetch(this.url);
-    console.log('TCL: created -> data', data);
     this.data = { ...this.data, ...data };
-    console.log('THIS DATA ->', this.data);
   },
   methods: {
-    getData(id) {
-      console.log('ID TO FETCH ->', id);
-      this.$router.push({ name: 'region', params: { regionId: id } });
+    getSector(id) {
+      console.log('sector ID TO FETCH ->', id);
+      this.$router.push({ name: 'sector', params: { sectorId: id } });
+    },
+    getCrag(id) {
+      console.log('crag ID TO FETCH ->', id);
+      this.$router.push({ name: 'crag', params: { cragId: id } });
+    },
+    showMap(crag) {
+      console.log('CRAG ->', crag);
+      this.$router.push({ name: 'map', query: { location: crag.location, name: crag.name } });
     },
   },
 };

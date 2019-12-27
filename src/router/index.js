@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import Main from '../views/Main.vue';
 
 Vue.use(VueRouter);
 
@@ -8,18 +8,13 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home,
-  },
-  {
-    path: '/areas',
-    name: 'home',
-    component: Home,
+    component: Main,
   },
   {
     path: '/region/:regionId',
     name: 'region',
     props: true,
-    component: () => import(/* webpackChunkName: "region" */ '../views/Region.vue'),
+    component: () => import(/* webpackChunkName: "region" */ '../views/Rejon.vue'),
   },
   {
     path: '/regions/:areaId',
@@ -28,12 +23,25 @@ const routes = [
     component: () => import(/* webpackChunkName: "regions" */ '../views/Regions.vue'),
   },
   {
-    path: '/about',
-    name: 'about',
+    path: '/sector/:sectorId',
+    name: 'sector',
+    props: true,
+    component: () => import(/* webpackChunkName: "sector" */ '../views/Sector.vue'),
+  },
+  {
+    path: '/crag/:sectorId',
+    name: 'crag',
+    props: true,
+    component: () => import(/* webpackChunkName: "crag" */ '../views/Crag.vue'),
+  },
+  {
+    path: '/map',
+    name: 'map',
+    props: true,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    component: () => import(/* webpackChunkName: "map" */ '../views/Map.vue'),
   },
 ];
 
