@@ -1,25 +1,26 @@
 <template>
   <div class="hello">
-    <v-list two-line>
+    <v-list two-line max-width="98vw">
       <v-list-item-group
         active-class="blue--text"
         v-model="selected"
         multiple
         v-if="data && data.routes && data.routes.length"
         >
-          <v-list-item v-for="(item) in data.routes" :key="item._id">
+          <v-list-item v-for="(item) in data.routes" :key="item._id" @click="showSelected">
             <template v-slot:default="{ active, toggle }">
               <v-list-item-content>
-                <v-list-item-title v-text="item.name"></v-list-item-title>
+                <v-list-item-title
+                  v-text="`${item.name},    Grade:  ${item.grade}`">
+                </v-list-item-title>
                 <v-list-item-subtitle
-                  class="text--primary"
-                  v-text="item.grade">
+                  v-text="`Author: ${item.author},    Year: ${item.year},   Length: ${item.length}`"
+                  >
                 </v-list-item-subtitle>
-                <v-list-item-subtitle v-text="item.author"></v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-action>
-                <v-list-item-action-text v-text="add"></v-list-item-action-text>
+                <v-list-item-action-text >Add</v-list-item-action-text>
                 <v-icon
                   v-if="!active"
                   color="grey lighten-1"
@@ -64,6 +65,7 @@ export default {
   data() {
     return {
       data: [],
+      selected: [],
     };
   },
   async created() {
@@ -79,6 +81,9 @@ export default {
     },
     getSector(id) {
       console.log('sector ID TO FETCH ->', id);
+    },
+    showSelected() {
+      setTimeout(() => console.log('Selected in', this.selected), 0);
     },
   },
 };

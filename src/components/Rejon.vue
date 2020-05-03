@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <v-list>
+    <v-list max-width="98vw">
       <v-list-group
             no-action
             sub-group
@@ -48,7 +48,7 @@
                 >
               </v-list-item-title>
               <v-list-item-icon @click="showMap(item)">
-                <v-icon >near_me</v-icon>
+                <v-icon color="green" >near_me</v-icon>
               </v-list-item-icon>
             </v-list-item>
           </v-list-group>
